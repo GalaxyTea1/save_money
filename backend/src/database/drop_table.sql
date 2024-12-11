@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS "expense";
+DROP TABLE IF EXISTS "category";
+DROP TABLE IF EXISTS "user";
+DROP EXTENSION IF EXISTS "uuid-ossp";

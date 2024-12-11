@@ -20,21 +20,21 @@ export class ExpensesService {
     return this.expensesRepository.save(expense);
   }
 
-  async findAll(userId: string, query?: { startDate?: Date; endDate?: Date; categoryId?: string }) {
+  async findAll(userId: string, query?: { startDate?: Date; endDate?: Date; categoryId?: string }): Promise<Expense[]> {
     const where: any = { userId };
-
-    if (query?.startDate && query?.endDate) {
-      where.date = Between(query.startDate, query.endDate);
-    }
 
     if (query?.categoryId) {
       where.categoryId = query.categoryId;
     }
 
+    if (query?.startDate && query?.endDate) {
+      where.date = Between(query.startDate, query.endDate);
+    }
+
     return this.expensesRepository.find({
       where,
-      relations: ['category'],
       order: { date: 'DESC' },
+      relations: ['category'],
     });
   }
 
@@ -43,9 +43,11 @@ export class ExpensesService {
       where: { id, userId },
       relations: ['category'],
     });
+
     if (!expense) {
       throw new NotFoundException(`Expense with ID ${id} not found`);
     }
+
     return expense;
   }
 
@@ -61,22 +63,5 @@ export class ExpensesService {
   async remove(id: string, userId: string): Promise<void> {
     const expense = await this.findOne(id, userId);
     await this.expensesRepository.remove(expense);
-  }
-
-  async getMonthlyTotal(userId: string, date: Date): Promise<number> {
-    const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
-    const result = await this.expensesRepository
-      .createQueryBuilder('expense')
-      .select('SUM(expense.amount)', 'total')
-      .where('expense.userId = :userId', { userId })
-      .andWhere('expense.date BETWEEN :startDate AND :endDate', {
-        startDate: startOfMonth,
-        endDate: endOfMonth,
-      })
-      .getRawOne();
-
-    return Number(result.total) || 0;
   }
 } 
