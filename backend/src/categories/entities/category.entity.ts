@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { Expense } from 'src/expenses/entities/expense.entity';
 
-@Entity()
+@Entity('category')
 export class Category {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -16,11 +16,12 @@ export class Category {
   @Column({ nullable: true })
   color: string;
 
-  @ManyToOne(() => User, user => user.categories)
-  user: User;
-
-  @Column()
+  @Column({ name: 'user_id' })
   userId: string;
+
+  @ManyToOne(() => User, user => user.categories)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @OneToMany(() => Expense, expense => expense.category)
   expenses: Expense[];

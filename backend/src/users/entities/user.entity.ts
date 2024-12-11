@@ -2,7 +2,7 @@ import { Category } from 'src/categories/entities/category.entity';
 import { Expense } from 'src/expenses/entities/expense.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
-@Entity()
+@Entity('user')
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -13,7 +13,7 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ name: 'full_name' })
   fullName: string;
 
   @OneToMany(() => Expense, expense => expense.user)
