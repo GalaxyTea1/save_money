@@ -26,9 +26,11 @@ export const authService = {
   login: async (data: LoginData) => {
     try {
       const response = await api.post<LoginResponse>('/auth/login', data)
-      const { access_token, user } = response.data
       
-      useAuthStore.getState().setAuth(user, access_token)
+      const accessToken = response.data.access_token
+      const userData = response.data.user
+      
+      useAuthStore.getState().setAuth(userData, accessToken)
       
       return response.data
     } catch (error) {

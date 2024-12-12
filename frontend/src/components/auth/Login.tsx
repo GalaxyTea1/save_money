@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../../services/auth/auth';
 import { toast } from 'react-hot-toast';
+import { useAuthStore } from '../../stores/authStore';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const Login = () => {
     try {
       await authService.login(formData);
       toast.success('Login success');
+      console.log(useAuthStore.getState())
       navigate('/');
     } catch (error) {
       if (error instanceof Error) {

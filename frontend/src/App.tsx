@@ -8,6 +8,7 @@ import AIAdvisor from './pages/AIAdvisor'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import ProtectedRoute from './components/auth/ProtectedRoute'
+import PublicRoute from './components/auth/PublicRoute'
 
 function App() {
   return (
@@ -35,9 +36,22 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            
+            <Route 
+              path="/login" 
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              } 
+            />
+            <Route 
+              path="/register" 
+              element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              } 
+            />
             <Route
               path="/"
               element={
