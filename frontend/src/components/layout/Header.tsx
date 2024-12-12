@@ -1,4 +1,4 @@
-import useStore from '../../store/useStore'
+import useStore from '../../stores/useStore'
 import { useState, useRef } from 'react'
 import { FiUser, FiSettings, FiLogOut } from 'react-icons/fi'
 

@@ -1,7 +1,15 @@
 import Sidebar from './Sidebar'
 import Header from './Header'
+import { useLocation } from 'react-router-dom'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+  const isAuthPage = ['/login', '/register'].includes(location.pathname);
+
+  if (isAuthPage) {
+    return <>{children}</>;
+  }
+
   return (
     <div className="flex h-screen bg-gray-50">
       <Sidebar />

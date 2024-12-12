@@ -1,5 +1,5 @@
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
-import useStore from '../store/useStore'
+import useStore from '../stores/useStore'
 
 const Dashboard = () => {
   const expenses = useStore((state) => state.expenses)

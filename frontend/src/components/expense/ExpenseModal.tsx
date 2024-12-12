@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import useStore from '../../store/useStore'
+import useStore from '../../stores/useStore'
 import { Expense } from '../../types/type'
 import { toast } from 'react-hot-toast'
 

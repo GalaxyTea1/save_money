@@ -1,10 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Layout from './components/layout/Layout'
 import Dashboard from './pages/Dashboard'
 import Expenses from './pages/Expenses'
 import Categories from './pages/Categories'
 import AIAdvisor from './pages/AIAdvisor'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
+import ProtectedRoute from './components/auth/ProtectedRoute'
 
 function App() {
   return (
@@ -32,10 +35,43 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/expenses" element={<Expenses />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/ai-advisor" element={<AIAdvisor />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/expenses"
+              element={
+                <ProtectedRoute>
+                  <Expenses />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/categories"
+              element={
+                <ProtectedRoute>
+                  <Categories />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ai-advisor"
+              element={
+                <ProtectedRoute>
+                  <AIAdvisor />
+                </ProtectedRoute>
+              }
+            />
+            
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Layout>
       </Router>

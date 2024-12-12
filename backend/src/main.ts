@@ -6,7 +6,6 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
-  // Cấu hình Swagger
   const config = new DocumentBuilder()
     .setTitle('Expense Management API')
     .setDescription('API documentation for Expense Management application')

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FiEdit2, FiTrash2, FiPlus, FiSearch } from "react-icons/fi";
-import useStore from "../store/useStore";
+import useStore from "../stores/useStore";
 import { format } from "date-fns";
 import ExpenseModal from '../components/expense/ExpenseModal';
 import { Expense } from "../types/type";

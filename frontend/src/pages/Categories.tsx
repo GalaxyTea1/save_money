@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FiEdit2, FiTrash2, FiPlus } from 'react-icons/fi'
 import toast from 'react-hot-toast'
-import useStore from '../store/useStore'
+import useStore from '../stores/useStore'
 import CategoryModal from '../components/category/CategoryModal'
 import { Category } from '../types/type'
 

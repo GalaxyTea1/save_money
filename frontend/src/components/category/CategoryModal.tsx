@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
-import useStore from '../../store/useStore'
+import useStore from '../../stores/useStore'
 import { Category } from '../../types/type'
 
 interface CategoryModalProps {
