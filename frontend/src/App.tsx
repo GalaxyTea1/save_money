@@ -9,26 +9,28 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 import PublicRoute from './components/auth/PublicRoute'
+import Profile from './components/profile/Profile'
+import Setting from './components/setting/Setting'
 
 function App() {
   return (
     <>
       <Toaster
-        position="top-right"
+        position='top-right'
         toastOptions={{
           duration: 3000,
           style: {
-            background: '#333',
-            color: '#fff',
+            background: "#333",
+            color: "#fff",
           },
           success: {
             style: {
-              background: '#059669',
+              background: "#059669",
             },
           },
           error: {
             style: {
-              background: '#DC2626',
+              background: "#DC2626",
             },
           },
         }}
@@ -36,24 +38,24 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-            <Route 
-              path="/login" 
+            <Route
+              path='/login'
               element={
                 <PublicRoute>
                   <Login />
                 </PublicRoute>
-              } 
+              }
             />
-            <Route 
-              path="/register" 
+            <Route
+              path='/register'
               element={
                 <PublicRoute>
                   <Register />
                 </PublicRoute>
-              } 
+              }
             />
             <Route
-              path="/"
+              path='/'
               element={
                 <ProtectedRoute>
                   <Dashboard />
@@ -61,7 +63,7 @@ function App() {
               }
             />
             <Route
-              path="/expenses"
+              path='/expenses'
               element={
                 <ProtectedRoute>
                   <Expenses />
@@ -69,7 +71,7 @@ function App() {
               }
             />
             <Route
-              path="/categories"
+              path='/categories'
               element={
                 <ProtectedRoute>
                   <Categories />
@@ -77,20 +79,36 @@ function App() {
               }
             />
             <Route
-              path="/ai-advisor"
+              path='/ai-advisor'
               element={
                 <ProtectedRoute>
                   <AIAdvisor />
                 </ProtectedRoute>
               }
             />
-            
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route
+              path='/profile'
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/settings'
+              element={
+                <ProtectedRoute>
+                  <Setting />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
         </Layout>
       </Router>
     </>
-  )
+  );
 }
 
 export default App

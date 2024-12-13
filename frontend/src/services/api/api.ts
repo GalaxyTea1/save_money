@@ -66,4 +66,12 @@ export const categoryApi = {
   delete: (id: string) => api.delete(`/categories/${id}`),
 }
 
+export const statsApi = {
+  getStatsMonthly: () => api.get('/stats/monthly-total'),
+  getStatsMonthlyDetails: () => api.get('/stats/monthly-stats'),
+  getStatsYearly: () => api.get('/stats//yearly-stats'),
+  getStatsByCategory: (year: number, month: number) => 
+    api.get(`/stats/category-stats`, { params: { year, month } })
+}
+
 export default api

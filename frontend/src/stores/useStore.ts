@@ -2,7 +2,6 @@ import { create } from 'zustand'
 import { Category, Expense } from '../types/type'
 
 interface Store {
-  user: { fullName: string } | null
   categories: Category[]
   expenses: Expense[]
   addCategory: (category: Category) => void
@@ -14,7 +13,6 @@ interface Store {
 }
 
 const useStore = create<Store>((set) => ({
-  user: { fullName: 'User Name' },
   categories: [],
   expenses: [],
   
