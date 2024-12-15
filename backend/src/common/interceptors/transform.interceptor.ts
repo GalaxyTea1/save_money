@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface Response<T> {
+  success: boolean;
   data: T;
   timestamp: string;
 }
@@ -21,7 +22,8 @@ export class TransformInterceptor<T>
   ): Observable<Response<T>> {
     return next.handle().pipe(
       map(data => ({
-        ...data,
+        success: true,
+        data: data,
         timestamp: new Date().toISOString(),
       })),
     );

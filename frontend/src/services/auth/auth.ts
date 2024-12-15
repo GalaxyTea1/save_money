@@ -3,12 +3,17 @@ import api from "../api/api";
 import { useAuthStore } from '../../stores/authStore'
 
 interface LoginResponse {
-  access_token: string;
-  user: {
-    id: string;
-    email: string;
-    fullName: string;
+  success: boolean;
+  data: {
+    access_token: string;
+    user: {
+      id: string;
+      email: string;
+      fullName: string;
+    };
   };
+  
+  timestamp: string;
 }
 
 interface LoginData {
@@ -26,13 +31,13 @@ export const authService = {
   login: async (data: LoginData) => {
     try {
       const response = await api.post<LoginResponse>('/auth/login', data)
-      
-      const accessToken = response.data.access_token
-      const userData = response.data.user
+      const loginData = response.data.data
+      const accessToken = loginData.access_token
+      const userData = loginData.user
       
       useAuthStore.getState().setAuth(userData, accessToken)
       
-      return response.data
+      return loginData
     } catch (error) {
       if (error instanceof AxiosError) {
         throw new Error(error.response?.data?.message || 'Login failed')

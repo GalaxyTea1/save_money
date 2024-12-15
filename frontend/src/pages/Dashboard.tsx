@@ -1,13 +1,27 @@
+import { useEffect } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import useStore from '../stores/useStore'
+import { categoryService } from '../services/category/category'
 
 const Dashboard = () => {
   const expenses = useStore((state) => state.expenses)
   const categories = useStore((state) => state.categories)
 
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        await categoryService.fetchCategories()
+      } catch (error) {
+        console.error('Error loading categories:', error)
+      }
+    }
+    
+    loadCategories()
+  }, [])
+
   const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0)
   
-  const expensesByCategory = categories.map(category => ({
+  const expensesByCategory = categories?.map(category => ({
     name: category.name,
     value: expenses
       .filter(expense => expense.categoryId === category.id)

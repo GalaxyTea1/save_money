@@ -4,6 +4,7 @@ import { Category, Expense } from '../types/type'
 interface Store {
   categories: Category[]
   expenses: Expense[]
+  setCategories: (categories: Category[]) => void
   addCategory: (category: Category) => void
   updateCategory: (category: Category) => void
   deleteCategory: (id: string) => void
@@ -15,6 +16,8 @@ interface Store {
 const useStore = create<Store>((set) => ({
   categories: [],
   expenses: [],
+  
+  setCategories: (categories) => set({ categories }),
   
   addCategory: (category) => 
     set((state) => ({ categories: [...state.categories, category] })),
