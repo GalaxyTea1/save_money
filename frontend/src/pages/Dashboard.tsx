@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import useStore from '../stores/useStore'
 import { categoryService } from '../services/category/category'
+import { expenseService } from '../services/expense/expense'
 
 const Dashboard = () => {
   const expenses = useStore((state) => state.expenses)
@@ -17,6 +18,14 @@ const Dashboard = () => {
     }
     
     loadCategories()
+  }, [])
+
+  useEffect(() => {
+    const loadExpenses = async () => {
+      await expenseService.fetchExpenses()
+    }
+
+    loadExpenses()
   }, [])
 
   const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0)

@@ -8,6 +8,7 @@ interface Store {
   addCategory: (category: Category) => void
   updateCategory: (category: Category) => void
   deleteCategory: (id: string) => void
+  setExpenses: (expenses: Expense[]) => void
   addExpense: (expense: Expense) => void
   updateExpense: (expense: Expense) => void
   deleteExpense: (id: string) => void
@@ -33,6 +34,8 @@ const useStore = create<Store>((set) => ({
     set((state) => ({
       categories: state.categories.filter((c) => c.id !== id),
     })),
+
+  setExpenses: (expenses) => set({ expenses }),
 
   addExpense: (expense) =>
     set((state) => ({ expenses: [...state.expenses, expense] })),
