@@ -10,6 +10,7 @@ import { StatsModule } from './stats/stats.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import * as path from 'path';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import * as path from 'path';
     CategoriesModule,
     ExpensesModule,
     StatsModule,
+    ChatModule,
   ],
   providers: [
     {

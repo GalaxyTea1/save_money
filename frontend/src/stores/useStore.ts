@@ -1,10 +1,11 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { Category, Expense } from '../types/type'
+import { AIMessage, Category, Expense } from '../types/type'
 
 interface Store {
   categories: Category[]
   expenses: Expense[]
+  messages: AIMessage[]
   
   addCategory: (category: Category) => void
   updateCategory: (category: Category) => void
@@ -12,6 +13,7 @@ interface Store {
   addExpense: (expense: Expense) => void
   updateExpense: (expense: Expense) => void
   deleteExpense: (id: string) => void
+  addMessage: (message: AIMessage) => void
 }
 
 const useStore = create<Store>()(
@@ -19,6 +21,7 @@ const useStore = create<Store>()(
     (set) => ({
       categories: [],
       expenses: [],
+      messages: [],
       
       addCategory: (category) => 
         set((state) => ({ categories: [...state.categories, category] })),
@@ -50,6 +53,9 @@ const useStore = create<Store>()(
         set((state) => ({
           expenses: state.expenses.filter((e) => e.id !== id),
         })),
+
+      addMessage: (message) =>
+        set((state) => ({ messages: [...state.messages, message] })),
     }),
     {
       name: 'expense-storage',

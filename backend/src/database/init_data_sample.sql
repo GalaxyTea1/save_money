@@ -24,3 +24,11 @@ INSERT INTO "expense" (id, amount, description, date, category_id, user_id) VALU
 INSERT INTO "expense" (id, amount, description, date, category_id, user_id) VALUES
     ('e0eebc99-9c0b-4ef8-bb6d-6bb9bd380a44', 200000, 'Xem phim', '2024-03-11 20:00:00', 'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a44', 'b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a22'),
     ('e0eebc99-9c0b-4ef8-bb6d-6bb9bd380a55', 500000, 'Mua sách', '2024-03-12 09:00:00', 'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a55', 'b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a22');
+
+-- Thêm một số tin nhắn mẫu
+INSERT INTO chat_message (content, role, user_id) VALUES
+    ('Xin chào AI, làm thế nào để học lập trình?', 'user', 1),
+    ('Để học lập trình hiệu quả, bạn nên bắt đầu với những ngôn ngữ cơ bản như Python hoặc JavaScript...', 'assistant', 1),
+    ('Cảm ơn AI đã giải thích!', 'user', 1),
+    ('Bạn có thể giúp tôi với bài tập về SQL không?', 'user', 2),
+    ('Tất nhiên, tôi có thể giúp bạn. Hãy chia sẻ câu hỏi của bạn.', 'assistant', 2);

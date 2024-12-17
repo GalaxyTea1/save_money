@@ -74,4 +74,10 @@ export const statsApi = {
     api.get(`/stats/category-stats`, { params: { year, month } })
 }
 
+export const chatApi = {
+  getHistory: () => api.get('/chat/history'),
+  create: (message: { role: 'user' | 'assistant'; content: string }) => 
+    api.post('/chat', message),
+}
+
 export default api

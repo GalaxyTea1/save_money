@@ -1,43 +1,28 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FiSend } from 'react-icons/fi'
-
-interface Message {
-  role: 'user' | 'assistant'
-  content: string
-}
+import useStore from '../stores/useStore'
+import { chatService } from '../services/chat/chat'
 
 const AIAdvisor = () => {
-  const [messages, setMessages] = useState<Message[]>([])
+  const { messages } = useStore()
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    chatService.fetchChatHistory()
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim()) return
 
-    const userMessage: Message = {
-      role: 'user',
-      content: input,
-    }
-
-    setMessages((prev) => [...prev, userMessage])
     setInput('')
     setIsLoading(true)
 
     try {
-      // TODO: Implement AI API call
-      const response = await new Promise((resolve) => 
-        setTimeout(() => resolve('This is a mock AI response. Replace with actual API call.'), 1000)
-      )
-
-      const aiMessage: Message = {
-        role: 'assistant',
-        content: response as string,
-      }
-
-      setMessages((prev) => [...prev, aiMessage])
+      await chatService.sendMessage(input)
     } catch (error) {
-      console.error('Error getting AI response:', error)
+      console.error('Error sending message:', error)
     } finally {
       setIsLoading(false)
     }
@@ -54,7 +39,6 @@ const AIAdvisor = () => {
       </div>
 
       <div className="flex-1 bg-white rounded-lg shadow-sm flex flex-col">
-        {/* Messages Container */}
         <div className="flex-1 p-6 overflow-y-auto space-y-4">
           {messages.length === 0 ? (
             <div className="text-center text-gray-500 mt-8">
@@ -89,7 +73,6 @@ const AIAdvisor = () => {
           )}
         </div>
 
-        {/* Input Form */}
         <form
           onSubmit={handleSubmit}
           className="border-t border-gray-200 p-4 flex gap-2"
