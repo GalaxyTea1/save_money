@@ -6,9 +6,7 @@ import { expenseService } from '../services/expense/expense'
 
 const Dashboard = () => {
   const expenses = useStore((state) => state.expenses)
-  console.log(expenses)
   const categories = useStore((state) => state.categories)
-
   useEffect(() => {
     const loadCategories = async () => {
       try {
@@ -23,18 +21,27 @@ const Dashboard = () => {
 
   useEffect(() => {
     const loadExpenses = async () => {
-      await expenseService.fetchExpenses()
+      const startDate = new Date();
+      startDate.setDate(1);
+      startDate.setHours(0, 0, 0, 0);
+
+      const endDate = new Date();
+      endDate.setMonth(endDate.getMonth() + 1);
+      endDate.setDate(0);
+      endDate.setHours(23, 59, 59, 999);
+
+      await expenseService.fetchExpenses(startDate, endDate);
     }
 
     loadExpenses()
   }, [])
 
-  const totalExpense = expenses.reduce((sum, expense) => sum + parseFloat(expense.amount), 0)
+  const totalExpense = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0)
   const expensesByCategory = categories?.map(category => ({
     name: category.name,
     value: expenses
       .filter(expense => expense.categoryId === category.id)
-      .reduce((sum, expense) => sum + parseFloat(expense.amount), 0)
+      .reduce((sum, expense) => sum + Number(expense.amount), 0)
   }))
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF99CC', '#99CCFF', '#FF99FF', '#FFCC99']
@@ -172,7 +179,7 @@ const Dashboard = () => {
                     {expense.description}
                   </td>
                   <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right'>
-                    {parseFloat(expense.amount).toLocaleString()}đ
+                    {Number(expense.amount).toLocaleString()}đ
                   </td>
                 </tr>
               ))}

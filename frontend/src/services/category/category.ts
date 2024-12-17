@@ -6,7 +6,7 @@ export const categoryService = {
     try {
       const response = await categoryApi.getAll()
       const categories = response.data.data
-      useStore.getState().setCategories(categories)
+      useStore.setState({ categories })
       return categories
     } catch (error) {
       console.error('Error fetching categories:', error)

@@ -6,11 +6,11 @@ import ExpenseModal from '../components/expense/ExpenseModal';
 import { Expense } from "../types/type";
 import toast from 'react-hot-toast'
 import Pagination from '../components/common/Pagination'
+import { expenseService } from "../services/expense/expense";
 
 const Expenses = () => {
   const expenses = useStore((state) => state.expenses);
   const categories = useStore((state) => state.categories);
-  const deleteExpense = useStore((state) => state.deleteExpense);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
@@ -39,7 +39,6 @@ const Expenses = () => {
     currentPage * itemsPerPage
   )
 
-  // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1)
   }, [searchTerm, selectedCategory, dateRange])
@@ -47,7 +46,7 @@ const Expenses = () => {
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this expense?')) {
       try {
-        await deleteExpense(id)
+        await expenseService.deleteExpense(id)
         toast.success('Expense deleted successfully')
       } catch (error) {
         console.error('Error deleting expense:', error)
@@ -154,7 +153,7 @@ const Expenses = () => {
                     {expense.description}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">
-                    {expense.amount.toLocaleString()}đ
+                    {Number(expense.amount).toLocaleString()}đ
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex justify-end space-x-2">

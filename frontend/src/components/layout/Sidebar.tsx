@@ -19,7 +19,6 @@ const Sidebar = () => {
             key={item.path}
             to={item.path}
             className="relative group"
-            title={item.label}
           >
             <div
               className={`p-3 rounded-lg transition-colors ${
@@ -29,9 +28,6 @@ const Sidebar = () => {
               }`}
             >
               <item.icon className="w-5 h-5" />
-            </div>
-            <div className="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity">
-              {item.label}
             </div>
           </Link>
         ))}

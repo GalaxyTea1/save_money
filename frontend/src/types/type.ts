@@ -13,7 +13,7 @@ export interface User {
   
   export interface Expense {
     id: string;
-    amount: string;
+    amount: number;
     description: string;
     categoryId: string;
     date: Date;

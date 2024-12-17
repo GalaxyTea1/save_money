@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import useStore from '../../stores/useStore'
 import { Expense } from '../../types/type'
 import { toast } from 'react-hot-toast'
+import { expenseService } from '../../services/expense/expense'
+import { useAuthStore } from '../../stores/authStore'
 
 interface ExpenseModalProps {
   isOpen: boolean
@@ -10,9 +12,8 @@ interface ExpenseModalProps {
 }
 
 const ExpenseModal = ({ isOpen, onClose, expense }: ExpenseModalProps) => {
-  const categories = useStore((state) => state.categories)
-  const addExpense = useStore((state) => state.addExpense)
-  const updateExpense = useStore((state) => state.updateExpense)
+  const {categories} = useStore()
+  const user = useAuthStore((state) => state.user)
 
   const [formData, setFormData] = useState({
     amount: 0,
@@ -26,7 +27,7 @@ const ExpenseModal = ({ isOpen, onClose, expense }: ExpenseModalProps) => {
   useEffect(() => {
     if (expense) {
       setFormData({
-        amount: expense.amount,
+        amount: Number(expense.amount),
         description: expense.description,
         categoryId: expense.categoryId,
         date: new Date(expense.date).toISOString().split('T')[0],
@@ -50,20 +51,24 @@ const ExpenseModal = ({ isOpen, onClose, expense }: ExpenseModalProps) => {
         return
       }
 
+      const expenseData = {
+        ...formData,
+        date: new Date(formData.date),
+        amount: Number(Number(formData.amount).toFixed(2)),
+      };
+
       if (expense) {
-        await updateExpense({
+        await expenseService.updateExpense({
           ...expense,
-          ...formData,
-          date: new Date(formData.date),
+          ...expenseData,
         })
         toast.success('Expense updated successfully')
       } else {
-        await addExpense({
-          ...formData,
+        await expenseService.addExpense({
+          ...expenseData,
           id: crypto.randomUUID(),
-          date: new Date(formData.date),
-          userId: 'default-user',
-        })
+          userId: user?.id || '',
+        });
         toast.success('Expense added successfully')
       }
       onClose()
