@@ -1,4 +1,5 @@
 import { Category } from 'src/categories/entities/category.entity';
+import { ChatMessage } from 'src/chat/entities/chat-message.entity';
 import { Expense } from 'src/expenses/entities/expense.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
@@ -16,9 +17,12 @@ export class User {
   @Column({ name: 'full_name' })
   fullName: string;
 
-  @OneToMany(() => Expense, expense => expense.user)
+  @OneToMany(() => Expense, expense => expense.user, {cascade: true})
   expenses: Expense[];
 
-  @OneToMany(() => Category, category => category.user)
+  @OneToMany(() => Category, category => category.user, {cascade: true})
   categories: Category[];
+
+  @OneToMany(() => ChatMessage, chatMessage => chatMessage.user, {cascade: true})
+  chatMessages: ChatMessage[];
 } 

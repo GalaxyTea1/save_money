@@ -9,18 +9,18 @@ const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
 export const chatService = {
   chat: model.startChat(),
 
-  createMessage(role: AIMessage['role'], content: string): AIMessage {
+  createMessage(role: AIMessage['role'], content: string, user_id: string): AIMessage {
     return {
       role,
       content,
-      timestamp: new Date()
+      user_id: user_id
     }
   },
 
   async fetchChatHistory() {
     try {
       const response = await chatApi.getHistory()
-      const messages = response.data
+      const messages = response.data.data
       useStore.setState({ messages })
       return messages
     } catch (error) {
@@ -29,22 +29,26 @@ export const chatService = {
     }
   },
 
-  async sendMessage(content: string) {
+  async sendMessage(content: string, user_id: string) {
     try {
-      const userMessage = this.createMessage('user', content)
+      // Add user message to the chat history
+      const userMessage = this.createMessage('user', content, user_id)
       await chatApi.create({
         role: 'user',
-        content: userMessage.content
+        content: userMessage.content,
+        user_id: userMessage.user_id
       })
       useStore.getState().addMessage(userMessage)
 
       const result = await this.chat.sendMessage(content)
       const aiResponse = await result.response
-      
-      const aiMessage = this.createMessage('ai', aiResponse.text())
+
+      // Add AI message to the chat history
+      const aiMessage = this.createMessage('ai', aiResponse.text(), user_id)
       await chatApi.create({
         role: 'assistant',
-        content: aiMessage.content
+        content: aiMessage.content,
+        user_id: aiMessage.user_id
       })
       useStore.getState().addMessage(aiMessage)
       

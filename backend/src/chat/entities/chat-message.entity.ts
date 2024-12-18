@@ -1,5 +1,5 @@
 import { User } from 'src/users/entities/user.entity';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity()
 export class ChatMessage {
@@ -12,11 +12,12 @@ export class ChatMessage {
   @Column()
   role: 'user' | 'assistant';
 
-  @ManyToOne(() => User)
-  user: User;
+  @Column({ name: 'user_id' })
+  user_id: string;
 
-  @Column()
-  user_id: number;
+  @ManyToOne(() => User, (user) => user.chatMessages)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @CreateDateColumn()
   createdAt: Date;

@@ -76,7 +76,7 @@ export const statsApi = {
 
 export const chatApi = {
   getHistory: () => api.get('/chat/history'),
-  create: (message: { role: 'user' | 'assistant'; content: string }) => 
+  create: (message: { role: 'user' | 'assistant'; content: string, user_id: string }) => 
     api.post('/chat', message),
 }
 

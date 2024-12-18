@@ -16,9 +16,9 @@ export class ChatService {
     return await this.chatMessageRepository.save(message);
   }
 
-  async findAllByUserId(userId: number) {
+  async findAllByUserId(userId: string) {
     return await this.chatMessageRepository.find({
-      where: { user_id: userId },
+      where: { user: { id: userId } },
       order: { createdAt: 'ASC' },
     });
   }

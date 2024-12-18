@@ -23,5 +23,5 @@ export interface User {
   export interface AIMessage {
     role: 'user' | 'ai';
     content: string;
-    timestamp: Date;
+    user_id: string;
   }
