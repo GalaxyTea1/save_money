@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { useThemeStore } from '../stores/themeStore';
 import ExportReports from './ExportReports';
 import BudgetManager from './BudgetManager';
 
 const DashboardHeader = () => {
-  const { isDark, toggleDark } = useThemeStore();
   const [showBudgetModal, setShowBudgetModal] = useState(false);
 
   return (
@@ -23,12 +21,7 @@ const DashboardHeader = () => {
           Setup Budget
         </button>
 
-        <button
-          onClick={toggleDark}
-          className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
-        >
-          {isDark ? '🌞' : '🌙'}
-        </button>
+        
 
         {/* Modal setup budget */}
         {showBudgetModal && (

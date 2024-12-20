@@ -28,7 +28,9 @@ const Header = () => {
   return (
     <header className='bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4'>
       <div className='flex justify-between items-center'>
-        <h1 className='text-xl font-bold text-gray-900 dark:text-white'>Expense Manager</h1>
+        <div className='flex items-center gap-4'>
+          <h1 className='text-xl font-bold text-gray-900 dark:text-white'>Expense Manager</h1>
+        </div>
 
         <div className='relative' ref={menuRef}>
           <button
@@ -41,7 +43,7 @@ const Header = () => {
           </button>
 
           {isMenuOpen && (
-            <div className='absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 border border-gray-200 dark:border-gray-700'>
+            <div className='absolute right-0 top-full mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 border border-gray-200 dark:border-gray-700 z-50'>
               <button 
                 onClick={handleProfileClick}
                 className='flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
