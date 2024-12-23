@@ -15,7 +15,7 @@ export class CategoriesService {
     const existingCategory = await this.categoriesRepository.findOne({
       where: { 
         name: createCategoryDto.name,
-        userId: userId 
+        user_id: userId 
       }
     });
 
@@ -25,21 +25,21 @@ export class CategoriesService {
 
     const category = this.categoriesRepository.create({
       ...createCategoryDto,
-      userId,
+      user_id: userId,
     });
     return this.categoriesRepository.save(category);
   }
 
   async findAll(userId: string): Promise<Category[]> {
     return this.categoriesRepository.find({
-      where: { userId },
+      where: { user_id: userId },
       order: { name: 'ASC' },
     });
   }
 
   async findOne(id: string, userId: string): Promise<Category> {
     const category = await this.categoriesRepository.findOne({
-      where: { id, userId },
+      where: { id, user_id: userId },
     });
 
     if (!category) {
@@ -56,7 +56,7 @@ export class CategoriesService {
       const existingCategory = await this.categoriesRepository.findOne({
         where: { 
           name: updateCategoryDto.name,
-          userId: userId,
+          user_id: userId,
           id: Not(id)
         }
       });

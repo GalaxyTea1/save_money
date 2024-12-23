@@ -40,7 +40,7 @@ export class Category {
     example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'
   })
   @Column({ name: 'user_id' })
-  userId: string;
+  user_id: string;
 
   @ApiHideProperty()
   @ManyToOne(() => User, user => user.categories)

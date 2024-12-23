@@ -11,6 +11,7 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import * as path from 'path';
 import { ChatModule } from './chat/chat.module';
+import { BudgetModule } from './budget/budget.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { ChatModule } from './chat/chat.module';
     ExpensesModule,
     StatsModule,
     ChatModule,
+    BudgetModule,
   ],
   providers: [
     {

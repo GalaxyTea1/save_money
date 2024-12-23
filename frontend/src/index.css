@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dark select {
+  background-color: #2d3748;
+  color: #f7fafc;
+  border-color: #4a5568;
+}
+
+.dark select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #63b3ed;
+}
+
+.dark input {
+  background-color: #2d3748;
+  color: #f7fafc;
+  border-color: #4a5568;
+}
+
+.dark input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #63b3ed;
+}

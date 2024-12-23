@@ -1,3 +1,4 @@
+import { Budget } from 'src/budget/entities/budget.entity';
 import { Category } from 'src/categories/entities/category.entity';
 import { ChatMessage } from 'src/chat/entities/chat-message.entity';
 import { Expense } from 'src/expenses/entities/expense.entity';
@@ -25,4 +26,7 @@ export class User {
 
   @OneToMany(() => ChatMessage, chatMessage => chatMessage.user, {cascade: true})
   chatMessages: ChatMessage[];
+
+  @OneToMany(() => Budget, budget => budget.user)
+  budgets: Budget[];
 } 
