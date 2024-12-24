@@ -1,0 +1,25 @@
+{
+    "settings": {
+      "title": "設定",
+      "language": "言語",
+      "appearance": "外観",
+      "darkMode": "ダークモードを有効にする",
+      "financialGoals": "財務目標",
+      "monthlySpendingLimit": "月間支出制限",
+      "savingsGoal": "貯蓄目標",
+      "enterAmount": "金額を入力",
+      "notifications": "通知",
+      "emailNotifications": "メール通知",
+      "budgetAlerts": "予算アラート",
+      "dangerZone": "危険ゾーン",
+      "deleteAccount": "アカウントを削除",
+      "deleteAccountWarning": "この操作は元に戻せません。慎重に進めてください。",
+      "cancel": "キャンセル",
+      "saveChanges": "変更を保存"
+    },
+    "languages": {
+      "english": "英語",
+      "vietnamese": "ベトナム語",
+      "japanese": "日本語"
+    }
+}

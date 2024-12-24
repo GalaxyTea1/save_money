@@ -12,6 +12,7 @@ import PublicRoute from './components/auth/PublicRoute'
 import Profile from './components/profile/Profile'
 import Setting from './components/setting/Setting'
 import useThemeStore from './stores/themeStore';
+import './i18n';
 
 function App() {
   const isDark = useThemeStore((state) => state.isDark);

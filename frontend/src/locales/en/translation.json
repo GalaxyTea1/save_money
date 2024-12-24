@@ -1,0 +1,25 @@
+{
+    "settings": {
+      "title": "Settings",
+      "language": "Language",
+      "appearance": "Appearance",
+      "darkMode": "Enable Dark Mode",
+      "financialGoals": "Financial Goals",
+      "monthlySpendingLimit": "Monthly Spending Limit",
+      "savingsGoal": "Savings Goal",
+      "enterAmount": "Enter amount",
+      "notifications": "Notifications",
+      "emailNotifications": "Email Notifications",
+      "budgetAlerts": "Budget Alerts",
+      "dangerZone": "Danger Zone",
+      "deleteAccount": "Delete Account",
+      "deleteAccountWarning": "This action is irreversible. Please proceed with caution.",
+      "cancel": "Cancel",
+      "saveChanges": "Save Changes"
+    },
+    "languages": {
+    "english": "English",
+    "vietnamese": "Vietnamese",
+    "japanese": "Japanese"
+  }
+}

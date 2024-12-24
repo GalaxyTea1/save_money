@@ -23,3 +23,14 @@
   outline: none;
   box-shadow: 0 0 0 2px #63b3ed;
 }
+
+select,
+input {
+  outline: none;
+}
+
+select,
+input {
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem;
+}
