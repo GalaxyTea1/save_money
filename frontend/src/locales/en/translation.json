@@ -21,5 +21,21 @@
     "english": "English",
     "vietnamese": "Vietnamese",
     "japanese": "Japanese"
+  },
+  "profile": {
+    "title": "Profile Settings",
+    "fullName": "Full Name",
+    "email": "Email",
+    "currency": "Currency",
+    "changePassword": "Change Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "cancel": "Cancel",
+    "saveChanges": "Save Changes"
+  },
+  "currencies": {
+    "usd": "USD ($)",
+    "eur": "EUR (€)",
+    "vnd": "VND (₫)"
   }
 }

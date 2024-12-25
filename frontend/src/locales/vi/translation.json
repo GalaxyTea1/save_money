@@ -21,5 +21,21 @@
       "english": "Tiếng Anh",
       "vietnamese": "Tiếng Việt",
       "japanese": "Tiếng Nhật"
+    },
+    "profile": {
+      "title": "Cài đặt hồ sơ",
+      "fullName": "Họ và tên",
+      "email": "Email",
+      "currency": "Tiền tệ",
+      "changePassword": "Đổi mật khẩu",
+      "newPassword": "Mật khẩu mới",
+      "confirmPassword": "Xác nhận mật khẩu",
+      "cancel": "Hủy",
+      "saveChanges": "Lưu thay đổi"
+    },
+    "currencies": {
+      "usd": "USD ($)",
+      "eur": "EUR (€)",
+      "vnd": "VND (₫)"
     }
 }
