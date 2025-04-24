@@ -9,25 +9,6 @@ import { expenseService } from '../services/expense/expense'
 import { useBudgetStore } from '../stores/budgetStore'
 import DashboardHeader from '../components/DashboardHeader'
 
-interface Expense {
-  id: string;
-  amount: number;
-  date: string;
-  categoryId: string;
-  description: string;
-}
-
-interface Category {
-  id: string;
-  name: string;
-  icon?: string;
-}
-
-interface Budget {
-  amount: number;
-  spent: number;
-}
-
 interface StatCardProps {
   title: string;
   value: string | number;
@@ -50,9 +31,9 @@ interface TrendData {
 }
 
 const Dashboard = () => {
-  const expenses = useStore(state => state.expenses) as Expense[]
-  const categories = useStore(state => state.categories) as Category[]
-  const budgets = useBudgetStore(state => state.budgets) as Budget[]
+  const expenses = useStore(state => state.expenses)
+  const categories = useStore(state => state.categories)
+  const budgets = useBudgetStore(state => state.budgets)
 
   useEffect(() => {
     const loadCategories = async () => {
