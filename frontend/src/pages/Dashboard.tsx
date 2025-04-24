@@ -9,10 +9,50 @@ import { expenseService } from '../services/expense/expense'
 import { useBudgetStore } from '../stores/budgetStore'
 import DashboardHeader from '../components/DashboardHeader'
 
+interface Expense {
+  id: string;
+  amount: number;
+  date: string;
+  categoryId: string;
+  description: string;
+}
+
+interface Category {
+  id: string;
+  name: string;
+  icon?: string;
+}
+
+interface Budget {
+  amount: number;
+  spent: number;
+}
+
+interface StatCardProps {
+  title: string;
+  value: string | number;
+  subtitle: string;
+}
+
+interface TableHeaderProps {
+  title: string;
+  align?: 'left' | 'right' | 'center';
+}
+
+interface TrendPoint {
+  month: string;
+  amount: number;
+}
+
+interface TrendData {
+  trend: number;
+  data: TrendPoint[];
+}
+
 const Dashboard = () => {
-  const expenses = useStore((state) => state.expenses)
-  const categories = useStore((state) => state.categories)
-  const budgets = useBudgetStore((state) => state.budgets)
+  const expenses = useStore(state => state.expenses) as Expense[]
+  const categories = useStore(state => state.categories) as Category[]
+  const budgets = useBudgetStore(state => state.budgets) as Budget[]
 
   useEffect(() => {
     const loadCategories = async () => {
@@ -43,7 +83,7 @@ const Dashboard = () => {
 
   const totalExpense = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0)
 
-  const expensesByCategory = categories?.map(category => ({
+  const expensesByCategory = categories.map(category => ({
     name: category.name,
     value: expenses
       .filter(expense => expense.categoryId === category.id)
@@ -55,7 +95,7 @@ const Dashboard = () => {
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF99CC', '#99CCFF', '#FF99FF', '#FFCC99']
 
-  const trendData = (() => {
+  const trendData: TrendData = (() => {
     const currentMonthTotal = totalExpense
     const lastMonthTotal = expenses
       .filter(expense => {
@@ -83,14 +123,12 @@ const Dashboard = () => {
     <div className='space-y-8'>
       <DashboardHeader />
 
-      {/* Stats Grid */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
         <StatCard title='Total Expenses' value={`${totalExpense.toLocaleString()}đ`} subtitle='This Month' />
         <StatCard title='Transactions' value={expenses.length} subtitle='This Month' />
         <StatCard title='Categories' value={categories.length} subtitle='Total' />
       </div>
 
-      {/* Trend Chart */}
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Trend Expenses</h3>
         <div className="h-[200px]">
@@ -108,7 +146,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Pie Chart */}
       <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm'>
         <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-4'>Expenses by Category</h3>
         <div className='h-[400px]'>
@@ -131,7 +168,6 @@ const Dashboard = () => {
             </PieChart>
           </ResponsiveContainer>
         </div>
-        {/* Legend */}
         <div className='mt-6 grid grid-cols-2 md:grid-cols-4 gap-4'>
           {expensesByCategory.map((category, index) => (
             <div key={category.name} className='flex items-center'>
@@ -145,7 +181,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Recent Transactions */}
       <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm'>
         <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-4'>Recent Transactions</h3>
         <div className='overflow-x-auto'>
@@ -184,7 +219,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Budget */}
       <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm'>
         <h3 className='text-sm font-medium text-gray-500 dark:text-gray-400 mb-1'>Ngân sách</h3>
         <p className='text-2xl font-bold text-gray-900 dark:text-white'>
@@ -196,7 +230,7 @@ const Dashboard = () => {
   )
 }
 
-const StatCard = ({ title, value, subtitle }) => (
+const StatCard = ({ title, value, subtitle }: StatCardProps) => (
   <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm'>
     <h3 className='text-sm font-medium text-gray-500 dark:text-gray-400 mb-1'>{title}</h3>
     <p className='text-2xl font-bold text-gray-900 dark:text-white'>{value}</p>
@@ -204,7 +238,7 @@ const StatCard = ({ title, value, subtitle }) => (
   </div>
 )
 
-const TableHeader = ({ title, align = 'left' }) => (
+const TableHeader = ({ title, align = 'left' }: TableHeaderProps) => (
   <th className={`px-6 py-3 text-${align} text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider`}>
     {title}
   </th>
