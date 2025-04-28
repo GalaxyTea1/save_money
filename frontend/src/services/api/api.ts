@@ -56,14 +56,14 @@ export const expenseApi = {
   getAll: (startDate?: Date, endDate?: Date, categoryId?: string) => api.get('/expenses', { params: { startDate, endDate, categoryId } }),
   getAllByCategory: (categoryId: string, startDate?: Date, endDate?: Date, searchValue?: string) => api.get(`/expenses/get-by-category/${categoryId}`, { params: { startDate, endDate, searchValue } }),
   create: (data: Omit<Expense, 'id'>) => api.post('/expenses', data),
-  update: (id: string, data: Partial<Expense>) => api.put(`/expenses/${id}`, data),
+  update: (id: string, data: Partial<Expense>) => api.patch(`/expenses/${id}`, data),
   delete: (id: string) => api.delete(`/expenses/${id}`),
 }
 
 export const categoryApi = {
   getAll: () => api.get('/categories'),
   create: (data: Omit<Category, 'id'>) => api.post('/categories', data),
-  update: (id: string, data: Partial<Category>) => api.put(`/categories/${id}`, data),
+  update: (id: string, data: Partial<Category>) => api.patch(`/categories/${id}`, data),
   delete: (id: string) => api.delete(`/categories/${id}`),
 }
 
