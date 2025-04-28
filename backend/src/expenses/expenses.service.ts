@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Between } from 'typeorm';
+import { Repository, Between, Like } from 'typeorm';
 import { Expense } from './entities/expense.entity';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 
@@ -49,6 +49,22 @@ export class ExpensesService {
     }
 
     return expense;
+  }
+
+  async findByCategory(userId: string, query?: { startDate?: Date; endDate?: Date; searchValue?: string }): Promise<Expense[]> {
+    const where: any = { userId };
+
+    if (query?.startDate && query?.endDate) {
+      where.date = Between(query.startDate, query.endDate);
+    }
+
+    if (query?.searchValue) {
+      where.description = Like(`%${query.searchValue}%`);
+    }
+
+    console.log(query)
+
+    return this.expensesRepository.find({ where });
   }
 
   async update(id: string, updateExpenseDto: CreateExpenseDto, userId: string): Promise<Expense> {

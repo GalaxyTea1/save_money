@@ -59,6 +59,36 @@ export class ExpensesController {
     return this.expensesService.findAll(req.user.id, query);
   }
 
+  @Get('get-by-category/:categoryId')
+  @ApiOperation({ summary: 'Get expenses by category' })
+  @ApiQuery({ name: 'startDate', required: false, type: Date })
+  @ApiQuery({ name: 'endDate', required: false, type: Date })
+  @ApiQuery({ name: 'searchValue', required: false, type: String })
+  @ApiResponse({ 
+    status: HttpStatus.OK, 
+    description: 'List of expenses by category.',
+    type: [Expense]
+  })
+  findByCategory(
+    @Request() req,
+    @Param('categoryId') categoryId: string,
+    @Query('startDate') startDate?: string,
+    @Query('endDate') endDate?: string,
+    @Query('searchValue') searchValue?: string,
+  ) {
+    const query: any = {};
+    
+    if (categoryId !== 'all') {
+      query.categoryId = categoryId;
+    }
+    
+    if (startDate) query.startDate = new Date(startDate);
+    if (endDate) query.endDate = new Date(endDate);
+    if (searchValue) query.searchValue = searchValue;
+
+    return this.expensesService.findByCategory(req.user.id, query);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get expense by id' })
   @ApiResponse({ 

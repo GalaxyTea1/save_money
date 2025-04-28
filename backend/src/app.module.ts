@@ -12,6 +12,7 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 import * as path from 'path';
 import { ChatModule } from './chat/chat.module';
 import { BudgetModule } from './budget/budget.module';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
@@ -32,6 +33,13 @@ import { BudgetModule } from './budget/budget.module';
         synchronize: true,
       }),
       inject: [ConfigService],
+      async dataSourceFactory(options) {
+        if (!options) throw new Error('Invalid options');
+        const dataSource = new DataSource(options);
+        await dataSource.initialize();
+        console.log('Kết nối database thành công!');
+        return dataSource;
+      },
     }),
     UsersModule,
     AuthModule,
