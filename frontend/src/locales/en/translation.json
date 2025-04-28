@@ -1,41 +1,57 @@
 {
     "settings": {
-      "title": "Settings",
-      "language": "Language",
-      "appearance": "Appearance",
-      "darkMode": "Enable Dark Mode",
-      "financialGoals": "Financial Goals",
-      "monthlySpendingLimit": "Monthly Spending Limit",
-      "savingsGoal": "Savings Goal",
-      "enterAmount": "Enter amount",
-      "notifications": "Notifications",
-      "emailNotifications": "Email Notifications",
-      "budgetAlerts": "Budget Alerts",
-      "dangerZone": "Danger Zone",
-      "deleteAccount": "Delete Account",
-      "deleteAccountWarning": "This action is irreversible. Please proceed with caution.",
-      "cancel": "Cancel",
-      "saveChanges": "Save Changes"
+        "title": "Settings",
+        "language": "Language",
+        "appearance": "Appearance",
+        "darkMode": "Enable Dark Mode",
+        "financialGoals": "Financial Goals",
+        "monthlySpendingLimit": "Monthly Spending Limit",
+        "savingsGoal": "Savings Goal",
+        "enterAmount": "Enter amount",
+        "notifications": "Notifications",
+        "emailNotifications": "Email Notifications",
+        "budgetAlerts": "Budget Alerts",
+        "dangerZone": "Danger Zone",
+        "deleteAccount": "Delete Account",
+        "deleteAccountWarning": "This action is irreversible. Please proceed with caution.",
+        "cancel": "Cancel",
+        "saveChanges": "Save Changes"
     },
     "languages": {
-    "english": "English",
-    "vietnamese": "Vietnamese",
-    "japanese": "Japanese"
-  },
-  "profile": {
-    "title": "Profile Settings",
-    "fullName": "Full Name",
-    "email": "Email",
-    "currency": "Currency",
-    "changePassword": "Change Password",
-    "newPassword": "New Password",
-    "confirmPassword": "Confirm Password",
-    "cancel": "Cancel",
-    "saveChanges": "Save Changes"
-  },
-  "currencies": {
-    "usd": "USD ($)",
-    "eur": "EUR (€)",
-    "vnd": "VND (₫)"
-  }
+        "english": "English",
+        "vietnamese": "Vietnamese",
+        "japanese": "Japanese"
+    },
+    "profile": {
+        "title": "Profile Settings",
+        "fullName": "Full Name",
+        "email": "Email",
+        "currency": "Currency",
+        "changePassword": "Change Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "cancel": "Cancel",
+        "saveChanges": "Save Changes"
+    },
+    "currencies": {
+        "usd": "USD ($)",
+        "eur": "EUR (€)",
+        "vnd": "VND (₫)"
+    },
+    "header": {
+        "headerTitle": "Expense Manager",
+        "home": "Home",
+        "transactions": "Transactions",
+        "budget": "Budget",
+        "reports": "Reports",
+        "settings": "Settings",
+        "profile": "Profile",
+        "logout": "Logout"
+    },
+    "menu": {
+        "home": "Home",
+        "expenses": "Expenses",
+        "categories": "Categories",
+        "aiAdvisor": "AI Advisor"
+    }
 }

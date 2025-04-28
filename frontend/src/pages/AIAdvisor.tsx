@@ -17,15 +17,23 @@ const AIAdvisor = () => {
   const user = useAuthStore.getState().user;
 
   useEffect(() => {
+    let isMounted = true;
+    
     const fetchMessages = async () => {
       try {
-        await chatService.fetchChatHistory()
+        if (isMounted) {
+          await chatService.fetchChatHistory()
+        }
       } catch (error) {
         console.error("Error fetching chat history:", error)
       }
     }
 
     fetchMessages()
+    
+    return () => {
+      isMounted = false;
+    }
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,14 +53,14 @@ const AIAdvisor = () => {
   }
 
   return (
-    <div className='h-[calc(100vh-12rem)] flex flex-col'>
+    <div className='h-[calc(100vh-12rem)] flex flex-col relative'>
       <div className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm mb-6'>
         <h2 className='text-lg font-medium text-gray-900 dark:text-white mb-2'>AI Advisor</h2>
         <p className='text-gray-600 dark:text-gray-300'>Ask me anything</p>
       </div>
 
       <div className='flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-sm flex flex-col'>
-        <div className='flex-1 p-6 overflow-y-auto space-y-4'>
+        <div className='flex-1 p-6 overflow-y-auto space-y-4 pb-16 max-h-[calc(100vh-20rem)]'>
           {!messages || messages.length === 0 ? (
             <div className='text-center text-gray-500 dark:text-gray-400 mt-8'>
               No messages yet. Start a conversation!
@@ -66,7 +74,7 @@ const AIAdvisor = () => {
                 }`}
               >
                 <div
-                  className={`max-w-[96%] rounded-lg px-4 py-2 my-2 whitespace-pre-line ${
+                  className={`max-w-[98%] rounded-lg px-4 py-2 my-2 whitespace-pre-line ${
                     message.role === "user"
                       ? "bg-blue-500 text-white"
                       : "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -88,7 +96,7 @@ const AIAdvisor = () => {
 
         <form
           onSubmit={handleSubmit}
-          className='border-t border-gray-200 dark:border-gray-700 p-4 flex gap-2'
+          className='sticky bottom-0 left-0 border-t border-gray-200 dark:border-gray-700 p-4 flex gap-2 w-full bg-white dark:bg-gray-800'
         >
           <input
             type='text'

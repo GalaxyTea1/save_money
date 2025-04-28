@@ -1,41 +1,57 @@
 {
     "settings": {
-      "title": "Cài đặt",
-      "language": "Ngôn ngữ",
-      "appearance": "Giao diện",
-      "darkMode": "Bật chế độ tối",
-      "financialGoals": "Mục tiêu tài chính",
-      "monthlySpendingLimit": "Giới hạn chi tiêu hàng tháng",
-      "savingsGoal": "Mục tiêu tiết kiệm",
-      "enterAmount": "Nhập số tiền",
-      "notifications": "Thông báo",
-      "emailNotifications": "Thông báo qua email",
-      "budgetAlerts": "Cảnh báo ngân sách",
-      "dangerZone": "Vùng nguy hiểm",
-      "deleteAccount": "Xóa tài khoản",
-      "deleteAccountWarning": "Hành động này không thể hoàn tác. Vui lòng cẩn thận.",
-      "cancel": "Hủy",
-      "saveChanges": "Lưu thay đổi"
+        "title": "Cài đặt",
+        "language": "Ngôn ngữ",
+        "appearance": "Giao diện",
+        "darkMode": "Bật chế độ tối",
+        "financialGoals": "Mục tiêu tài chính",
+        "monthlySpendingLimit": "Giới hạn chi tiêu hàng tháng",
+        "savingsGoal": "Mục tiêu tiết kiệm",
+        "enterAmount": "Nhập số tiền",
+        "notifications": "Thông báo",
+        "emailNotifications": "Thông báo qua email",
+        "budgetAlerts": "Cảnh báo ngân sách",
+        "dangerZone": "Vùng nguy hiểm",
+        "deleteAccount": "Xóa tài khoản",
+        "deleteAccountWarning": "Hành động này không thể hoàn tác. Vui lòng cẩn thận.",
+        "cancel": "Hủy",
+        "saveChanges": "Lưu thay đổi"
     },
     "languages": {
-      "english": "Tiếng Anh",
-      "vietnamese": "Tiếng Việt",
-      "japanese": "Tiếng Nhật"
+        "english": "Tiếng Anh",
+        "vietnamese": "Tiếng Việt",
+        "japanese": "Tiếng Nhật"
     },
     "profile": {
-      "title": "Cài đặt hồ sơ",
-      "fullName": "Họ và tên",
-      "email": "Email",
-      "currency": "Tiền tệ",
-      "changePassword": "Đổi mật khẩu",
-      "newPassword": "Mật khẩu mới",
-      "confirmPassword": "Xác nhận mật khẩu",
-      "cancel": "Hủy",
-      "saveChanges": "Lưu thay đổi"
+        "title": "Cài đặt hồ sơ",
+        "fullName": "Họ và tên",
+        "email": "Email",
+        "currency": "Tiền tệ",
+        "changePassword": "Đổi mật khẩu",
+        "newPassword": "Mật khẩu mới",
+        "confirmPassword": "Xác nhận mật khẩu",
+        "cancel": "Hủy",
+        "saveChanges": "Lưu thay đổi"
     },
     "currencies": {
-      "usd": "USD ($)",
-      "eur": "EUR (€)",
-      "vnd": "VND (₫)"
+        "usd": "USD ($)",
+        "eur": "EUR (€)",
+        "vnd": "VND (₫)"
+    },
+    "header": {
+        "headerTitle": "Quản lý chi tiêu",
+        "home": "Trang chủ",
+        "transactions": "Giao dịch",
+        "budget": "Ngân sách",
+        "reports": "Báo cáo",
+        "settings": "Cài đặt",
+        "profile": "Hồ sơ",
+        "logout": "Đăng xuất"
+    },
+    "menu": {
+        "home": "Trang chủ",
+        "expenses": "Chi tiêu",
+        "categories": "Danh mục",
+        "aiAdvisor": "Cố vấn AI"
     }
 }

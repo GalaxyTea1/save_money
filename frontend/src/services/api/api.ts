@@ -54,6 +54,7 @@ export const authApi = {
 
 export const expenseApi = {
   getAll: (startDate?: Date, endDate?: Date, categoryId?: string) => api.get('/expenses', { params: { startDate, endDate, categoryId } }),
+  getAllByCategory: (categoryId: string, startDate?: Date, endDate?: Date, searchValue?: string) => api.get(`/expenses/get-by-category/${categoryId}`, { params: { startDate, endDate, searchValue } }),
   create: (data: Omit<Expense, 'id'>) => api.post('/expenses', data),
   update: (id: string, data: Partial<Expense>) => api.put(`/expenses/${id}`, data),
   delete: (id: string) => api.delete(`/expenses/${id}`),

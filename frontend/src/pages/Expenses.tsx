@@ -15,29 +15,21 @@ const Expenses = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [dateRange, setDateRange] = useState({
     start: '',
     end: '',
   });
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 10
+  const [isLoading, setIsLoading] = useState(false);
 
-  const filteredExpenses = expenses.filter(expense => {
-    const matchesSearch = expense.description.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory ? expense.categoryId === selectedCategory : true
-    const expenseDate = new Date(expense.date)
-    const matchesDateRange = (!dateRange.start || expenseDate >= new Date(dateRange.start)) &&
-                           (!dateRange.end || expenseDate <= new Date(dateRange.end))
-    
-    return matchesSearch && matchesCategory && matchesDateRange
-  })
-
-  const totalPages = Math.ceil(filteredExpenses.length / itemsPerPage)
-  const paginatedExpenses = filteredExpenses.slice(
+  const paginatedExpenses = expenses.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
-  )
+  );
+
+  const totalPages = Math.ceil(expenses.length / itemsPerPage);
 
   useEffect(() => {
     setCurrentPage(1)
@@ -55,46 +47,79 @@ const Expenses = () => {
     }
   }
 
+  const handleSearch = async () => {
+    try {
+      setIsLoading(true);
+      const searchResults = await expenseService.fetchExpensesByCategory(
+        selectedCategory, 
+        new Date(dateRange.start), 
+        new Date(dateRange.end), 
+        searchTerm
+      );
+      useStore.setState({ expenses: searchResults });
+    } catch (error) {
+      console.error('Error searching expenses:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="relative">
-            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" />
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 flex-grow">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search expenses..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+            >
+              <option value="all">All Categories</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+
             <input
-              type="text"
-              placeholder="Search expenses..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+              type="date"
+              value={dateRange.start}
+              onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+            />
+            <input
+              type="date"
+              value={dateRange.end}
+              onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
             />
           </div>
 
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+          <button 
+            onClick={handleSearch}
+            disabled={isLoading}
+            className="px-4 py-2 w-full md:w-32 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 flex items-center justify-center gap-2"
           >
-            <option value="">All Categories</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-
-          <input
-            type="date"
-            value={dateRange.start}
-            onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
-          />
-          <input
-            type="date"
-            value={dateRange.end}
-            onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
-          />
+            {isLoading ? (
+                <span className="animate-spin">⏳</span>
+            ) : (
+              <>
+                <FiSearch />
+                <span>Tìm kiếm</span>
+              </>
+            )}
+          </button>
         </div>
       </div>
 

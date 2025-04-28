@@ -15,6 +15,18 @@ export const expenseService = {
     }
   },
 
+  async fetchExpensesByCategory(categoryId: string | 'all', startDate?: Date, endDate?: Date, searchValue?: string) {
+    try {
+      const response = await expenseApi.getAllByCategory(categoryId, startDate, endDate, searchValue)
+      const expenses = response.data.data
+      useStore.setState({expenses})
+      return expenses
+    } catch (error) {
+      console.error('Error fetching expenses by category:', error)
+      throw error
+    }
+  },
+
   async addExpense(expense: Expense) {
     try {
       const response = await expenseApi.create(expense)
