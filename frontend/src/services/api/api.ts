@@ -63,7 +63,7 @@ export const expenseApi = {
 export const categoryApi = {
   getAll: () => api.get('/categories'),
   create: (data: Omit<Category, 'id'>) => api.post('/categories', data),
-  update: (id: string, data: Partial<Category>) => api.put(`/categories/${id}`, data),
+  update: (id: string, data: Partial<Category>) => api.patch(`/categories/${id}`, data),
   delete: (id: string) => api.delete(`/categories/${id}`),
 }
 

@@ -45,4 +45,13 @@ export const categoryService = {
     }
   },
 
+  deleteCategory: async (id: string) => {
+    try {
+      await categoryApi.delete(id)
+      useStore.getState().deleteCategory(id)
+    } catch (error) {
+      console.error('Error deleting category:', error)
+      throw error
+    }
+  },
 }
