@@ -31,6 +31,9 @@ import { DataSource } from 'typeorm';
         database: configService.get('DB_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: false,
+        ssl: {
+          rejectUnauthorized: false, 
+        },
       }),
       inject: [ConfigService],
       async dataSourceFactory(options) {
