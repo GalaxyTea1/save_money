@@ -19,8 +19,7 @@
     },
     "languages": {
         "english": "English",
-        "vietnamese": "Vietnamese",
-        "japanese": "Japanese"
+        "vietnamese": "Vietnamese"
     },
     "profile": {
         "title": "Profile Settings",
@@ -53,5 +52,24 @@
         "expenses": "Expenses",
         "categories": "Categories",
         "aiAdvisor": "AI Advisor"
+    },
+    "dashboard": {
+        "dashboard": "Dashboard",
+        "setupBudget": "Setup Budget",
+        "trendExpenses": "Trend Expenses",
+        "totalExpenses": "Total Expenses",
+        "transactions": "Transactions",
+        "categories": "Categories",
+        "thisMonth": "This Month",
+        "lastMonth": "Last Month",
+        "total": "Total",
+        "comparedToLastMonth": "compared to last month",
+        "expensesByCategory": "Expenses by Category",
+        "recentTransactions": "Recent Transactions",
+        "date": "Date",
+        "category": "Category",
+        "description": "Description",
+        "amount": "Amount",
+        "budget": "Budget"
     }
 }

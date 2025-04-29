@@ -31,13 +31,13 @@ const Header = () => {
     const getBreadcrumbTitle = () => {
         switch (location.pathname) {
             case "/":
-                return "Home";
+                return "menu.home";
             case "/expenses":
-                return "Expenses";
+                return "menu.expenses";
             case "/categories":
-                return "Categories";
+                return "menu.categories";
             case "/ai-advisor":
-                return "AI Advisor";
+                return "menu.aiAdvisor";
             default:
                 return "";
         }
@@ -54,7 +54,7 @@ const Header = () => {
                         {breadcrumbTitle && (
                             <>
                                 <FiChevronRight className='mx-2 text-gray-400' />
-                                <span className='text-xl text-blue-500 font-semibold'>{breadcrumbTitle}</span>
+                                <span className='text-xl text-blue-500 font-semibold'>{t(breadcrumbTitle)}</span>
                             </>
                         )}
                     </div>
@@ -76,19 +76,19 @@ const Header = () => {
                                 onClick={handleProfileClick}
                                 className='flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                             >
-                                <FiUser className='mr-3' /> Profile
+                                <FiUser className='mr-3' /> {t("header.profile")}
                             </button>
                             <button
                                 onClick={handleSettingsClick}
                                 className='flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                             >
-                                <FiSettings className='mr-3' /> Settings
+                                <FiSettings className='mr-3' /> {t("header.settings")}
                             </button>
                             <button
                                 className='flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700'
                                 onClick={handleLogout}
                             >
-                                <FiLogOut className='mr-3' /> Logout
+                                <FiLogOut className='mr-3' /> {t("header.logout")}
                             </button>
                         </div>
                     )}

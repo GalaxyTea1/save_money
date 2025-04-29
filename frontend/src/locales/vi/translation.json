@@ -19,8 +19,7 @@
     },
     "languages": {
         "english": "Tiếng Anh",
-        "vietnamese": "Tiếng Việt",
-        "japanese": "Tiếng Nhật"
+        "vietnamese": "Tiếng Việt"
     },
     "profile": {
         "title": "Cài đặt hồ sơ",
@@ -53,5 +52,24 @@
         "expenses": "Chi tiêu",
         "categories": "Danh mục",
         "aiAdvisor": "Cố vấn AI"
+    },
+    "dashboard": {
+        "dashboard": "Bảng điều khiển",
+        "setupBudget": "Thiết lập ngân sách",
+        "trendExpenses": "Xu hướng chi tiêu",
+        "totalExpenses": "Tổng chi tiêu",
+        "transactions": "Giao dịch",
+        "categories": "Danh mục",
+        "thisMonth": "Tháng này",
+        "lastMonth": "Tháng trước",
+        "total": "Tổng",
+        "comparedToLastMonth": "so với tháng trước",
+        "expensesByCategory": "Chi tiêu theo danh mục",
+        "category": "Danh mục",
+        "recentTransactions": "Giao dịch gần đây",
+        "date": "Ngày",
+        "description": "Mô tả",
+        "amount": "Số tiền",
+        "budget": "Ngân sách"
     }
 }

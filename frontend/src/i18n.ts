@@ -3,7 +3,6 @@ import { initReactI18next } from 'react-i18next';
 
 import enTranslation from './locales/en/translation.json';
 import viTranslation from './locales/vi/translation.json';
-import jaTranslation from './locales/ja/translation.json';
 
 i18n
   .use(initReactI18next)
@@ -11,7 +10,6 @@ i18n
     resources: {
       en: { translation: enTranslation },
       vi: { translation: viTranslation },
-      ja: { translation: jaTranslation },
     },
     lng: 'en', 
     fallbackLng: 'en',
